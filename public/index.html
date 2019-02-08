@@ -18,9 +18,8 @@
                     <!-- all assets that can be cached by browser -->
                     <img crossorigin="anonymous" id="skymap" src="/assets/textures/CloudySky.jpg">
                     <img crossorigin="anonymous" id="cowmap" src="/assets/textures/Cow.png">
-                    <img id="hatmap" src="/assets/textures/Hat.png">
                     <img id="tableMap" src="/assets/textures/Table.png">
-                    <a-asset-item id="Hat-obj" src="/assets/models/Hat.obj">
+                    <a-asset-item crossorigin="anonymous" id="Helmet-gltf" src="/assets/models/DamagedHelmet.glb">
                     <a-asset-item crossorigin="anonymous" id="Cow-obj" src="/assets/models/Cow.obj">
                     <a-asset-item id="Table-obj" src="/assets/models/Table.obj">
 
@@ -52,17 +51,17 @@
                 <a-entity id="deleteSound" sound="src:#delete-sound"></a-entity>
             
                 <!-- default lighting added in manually -->
-                <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
+                <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shSadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
                 <a-entity light="type: ambient; intensity: 1.0; color:#bbb;"></a-entity>
             
                 <!-- our helmet model from : https://github.com/KhronosGroup/glTF-Sample-Models -->
-                <a-entity create-cow-component src="#Hat-obj" position="-2 1.75 -2.5" scale="1 1 1" shadow="cast:true; receive:true;" spherical-env-map="src:#skymap;"></a-gltf-model>
+                <a-gltf-model create-cow-component src="#Helmet-gltf" position="-2 1.7 -4" scale="1 1 1" shadow="cast:true; receive:true;" spherical-env-map="src:#skymap;"></a-gltf-model>
 
-                <a-entity obj-model="obj:#Table-obj" position="0 0 -2.4" scale="0.05 0.03 0.05" material="color:#fff; src:#tableMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity obj-model="obj:#Table-obj;" position="0 0 -2.4" scale="0.05 0.03 0.05" material="color:#fff; src:#tableMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
 
                     
                 <!-- plane so we can see shadows -->
-                <a-entity id="plane" geometry="primitive:plane; width:10; height:10;" position="0 0 -4" rotation="-90 0 0" 
+                <a-entity id="plane" geometry="primitive:plane; width:4; height:4;" position="0 0 -4" rotation="-90 0 0" 
                     shadow="receive:true;" material="color:#FFFFE0; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;"></a-entity>
             
                 <!-- manual method of creating "sky sphere" -->
