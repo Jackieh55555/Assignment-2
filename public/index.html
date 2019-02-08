@@ -9,6 +9,8 @@
         <!-- lets load in our components -->
         <script src="/js/create-cow-component.js"></script>
         <script src="/js/remove-component.js"></script>
+        <script src="/js/play-music.js"></script>
+
     </head>
     <body>
         <!-- main scene and we added shadows .. -->
@@ -16,16 +18,17 @@
                 <a-assets timeout="3000">
 
                     <!-- all assets that can be cached by browser -->
-                    <img crossorigin="anonymous" id="skymap" src="/assets/textures/CloudySky.jpg">
+                    <img crossorigin="anonymous" id="skymap" src="/assets/textures/Sky.jpg">
                     <img crossorigin="anonymous" id="cowmap" src="/assets/textures/Cow.png">
-                    <img id="wallMap" src="/assets/textures/Wall.png">
-                    <img id="tableMap" src="/assets/textures/Table.png">
-                    <img id="hatMap" src="/assets/textures/Hat.png">
+                    <img id="roomMap" src="/assets/textures/RoomInterior.png">
+                    <img id="hatMap" src="/assets/textures/Hat.png">                    
+                    <img id="musicBoxMap" src="/assets/textures/MusicBox.png">
                     <a-asset-item crossorigin="anonymous" id="Helmet-gltf" src="/assets/models/DamagedHelmet.glb">
                     <a-asset-item crossorigin="anonymous" id="Cow-obj" src="/assets/models/Cow.obj">
-                    <a-asset-item id="Wall-obj" src="/assets/models/Wall.obj">
-                    <a-asset-item id="Table-obj" src="/assets/models/Table.obj">
+                    <a-asset-item id="Room-obj" src="/assets/models/RoomInterior.obj">
                     <a-asset-item id="Hat-obj" src="/assets/models/Hat.obj">
+                    <a-asset-item id="musicBox-obj" src="/assets/models/MusicBox.obj">
+
 
 
 
@@ -33,6 +36,8 @@
                     <!-- sounds from "SuperSays" project : https://github.com/supermedium/supersays/tree/master/src/assets -->
                     <a-asset-item crossorigin="anonymous" id="create-sound" src="/assets/sound/0.ogg" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="delete-sound" src="/assets/sound/1.ogg" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="play-sound" src="/assets/sound/Happier.mp3" response-type="arraybuffer"></a-asset-item>
+
 
                     <!-- this is the recommended method to preload sound though the above method seems to work consistently -->
                     <!-- <audio id="create-sound" crossorigin="anonymous" src="/assets/sound/0.ogg" ></audio> -->
@@ -54,6 +59,7 @@
                 <!-- sound entities we will query and play in components -->
                 <a-entity id="createSound" sound="src:#create-sound"></a-entity>
                 <a-entity id="deleteSound" sound="src:#delete-sound"></a-entity>
+                <a-entity id="playSound" sound="src:#play-sound"></a-entity>
             
                 <!-- default lighting added in manually -->
                 <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
@@ -62,13 +68,13 @@
                 <!-- our helmet model from : https://github.com/KhronosGroup/glTF-Sample-Models -->
                 <a-gltf-model create-cow-component src="#Helmet-gltf" position="-2 1.7 -4" scale="1 1 1" shadow="cast:true; receive:true;" spherical-env-map="src:#skymap;"></a-gltf-model>
                 <a-entity create-cow-component obj-model="obj:#Hat-obj;" position="0 1.15 -2.35" scale="0.02 0.015 0.02" material="color:#fff; src:#hatMap; sphericalEnvMap:#skymap; roughness:2.0; metalness:0.2;" shadow="cast:false; receive:true;"></a-entity>
-                <a-entity obj-model="obj:#Wall-obj;" position="0 0 -2.4" scale="0.05 0.025 0.05" material="color:#fff; src:#wallMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;" shadow="cast:false; receive:true;"></a-entity>
-                <a-entity obj-model="obj:#Table-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#tableMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity obj-model="obj:#Room-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#roomMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity play-music obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
 
                     
                 <!-- plane so we can see shadows -->
                 <a-entity id="plane" geometry="primitive:plane; width:30; height:30;" position="0 0 -4" rotation="-90 0 0" 
-                    shadow="receive:true;" material="color:#FFFFE0; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;"></a-entity>
+                    shadow="receive:true;" material="color:#6B6B6B; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;"></a-entity>
             
                 <!-- manual method of creating "sky sphere" -->
                 <a-entity id="sky"
