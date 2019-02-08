@@ -18,9 +18,9 @@
                     <!-- all assets that can be cached by browser -->
                     <img crossorigin="anonymous" id="skymap" src="/assets/textures/CloudySky.jpg">
                     <img crossorigin="anonymous" id="cowmap" src="/assets/textures/Cow.png">
-                    <img crossorigin="anonymous" id="hatmap" src="/assets/textures/Hat.png">
+                    <img id="hatmap" src="/assets/textures/Hat.png">
                     <img id="tableMap" src="/assets/textures/Table.png">
-                    <a-asset-item crossorigin="anonymous" id="Hat-obj" src="/assets/models/Hat.obj">
+                    <a-asset-item id="Hat-obj" src="/assets/models/Hat.obj">
                     <a-asset-item crossorigin="anonymous" id="Cow-obj" src="/assets/models/Cow.obj">
                     <a-asset-item id="Table-obj" src="/assets/models/Table.obj">
 
@@ -58,7 +58,7 @@
                 <!-- our helmet model from : https://github.com/KhronosGroup/glTF-Sample-Models -->
                 <a-entity create-cow-component src="#Hat-obj" position="-2 1.75 -2.5" scale="1 1 1" shadow="cast:true; receive:true;" spherical-env-map="src:#skymap;"></a-gltf-model>
 
-                <a-entity obj-model="obj:#Table-obj;" position="0 0 -2.4" scale="0.05 0.03 0.05" material="color:#fff; src:#tableMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity obj-model="obj:#Table-obj" position="0 0 -2.4" scale="0.05 0.03 0.05" material="color:#fff; src:#tableMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
 
                     
                 <!-- plane so we can see shadows -->
