@@ -20,37 +20,33 @@
 
                     <!-- all assets that can be cached by browser -->
                     <img crossorigin="anonymous" id="skymap" src="/assets/textures/Sky.jpg">
-                    <img crossorigin="anonymous" id="cowmap" src="/assets/textures/Cow.png">
                     <img id="roomMap" src="/assets/textures/RoomInterior.png">
-                    <img id="hatMap" src="/assets/textures/Hat.png">                    
                     <img id="musicBoxMap" src="/assets/textures/MusicBox.png">
                     <img id="tvMap" src="/assets/textures/TV.png">
                     <img id="remoteControlMap" src="/assets/textures/Remote Control.png">
                     <img id="tvScreenMap" src="/assets/textures/TVScreen.png">
                     <img id="fireplaceMap" src="/assets/textures/Fireplace.png">
+                    <img id="dogMap" src="/assets/textures/Dog.png">
+                    <img id="ballMap" src="/assets/textures/Ball.png">
 
-
-                    <a-asset-item crossorigin="anonymous" id="Helmet-gltf" src="/assets/models/DamagedHelmet.glb">
-                    <a-asset-item crossorigin="anonymous" id="Cow-obj" src="/assets/models/Cow.obj">
                     <a-asset-item id="Room-obj" src="/assets/models/RoomInterior.obj">
-                    <a-asset-item id="Hat-obj" src="/assets/models/Hat.obj">
                     <a-asset-item id="musicBox-obj" src="/assets/models/MusicBox.obj">
                     <a-asset-item id="tv-obj" src="/assets/models/TV.obj">
                     <a-asset-item id="remoteControl-obj" src="/assets/models/Remote Control.obj">
                     <a-asset-item id="tvScreen-obj" src="/assets/models/TVScreen.obj">
                     <a-asset-item id="fireplace-obj" src="/assets/models/Fireplace.obj">
-
-
-
+                    <a-asset-item id="dog-obj" src="/assets/models/Dog.obj">
+                    <a-asset-item id="ball-obj" src="/assets/models/Ball.obj">
 
                     <!-- use this method if you are having problems with sound playing -->
                     <!-- sounds from "SuperSays" project : https://github.com/supermedium/supersays/tree/master/src/assets -->
                     <a-asset-item crossorigin="anonymous" id="create-sound" src="/assets/sound/0.ogg" response-type="arraybuffer"></a-asset-item>
-                    <a-asset-item crossorigin="anonymous" id="delete-sound" src="/assets/sound/1.ogg" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="delete-sound" src="/assets/sound/Delete.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-sound" src="/assets/sound/Happier.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-effect" src="/assets/sound/TV_SoundEffect.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-ScreenEffect" src="/assets/sound/TV_Screen.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-FireEffect" src="/assets/sound/Fireplace.mp3" response-type="arraybuffer"></a-asset-item>
+                    <a-asset-item crossorigin="anonymous" id="play-DogEffect" src="/assets/sound/Dog.mp3" response-type="arraybuffer"></a-asset-item>
 
 
                     <!-- this is the recommended method to preload sound though the above method seems to work consistently -->
@@ -61,12 +57,10 @@
                 <!-- traditional method of creating a camera and cursor component for selection. select with reticle. -->
                 <!-- Also added in controls for desktop mouse/kb -->
                 <a-entity position="0 2 0 " camera look-controls wasd-controls>
-                    <!-- if you add rayOrigin:mouse to teh cursor properties selection happens where you click -->
-                    <!-- <a-entity   cursor="fuse:true; fuseTimeout:500; rayOrigin:mouse;" -->
                     <a-entity   cursor="fuse:true; fuseTimeout:500;"
                                 position="0 0 -1"
                                 geometry="primitive:ring; radiusInner:0.02; radiusOuter:0.03;"
-                                material="shader:flat; color:blue;" >
+                                material="shader:flat; color:black;" >
                     </a-entity>
                 </a-entity>
 
@@ -77,23 +71,36 @@
                 <a-entity id="playEffect" sound="src:#play-effect"></a-entity>
                 <a-entity id="playScreenEffect" sound="src:#play-ScreenEffect"></a-entity>
                 <a-entity id="playFireEffect" sound="src:#play-FireEffect"></a-entity>
-
-
+                <a-entity id="playDogEffect" sound="src:#play-DogEffect"></a-entity>
 
             
                 <!-- default lighting added in manually -->
                 <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
                 <a-entity light="type: ambient; intensity: 1.0; color:#bbb;"></a-entity>
-            
-                <!-- our helmet model from : https://github.com/KhronosGroup/glTF-Sample-Models -->
-                <a-gltf-model create-cow-component src="#Helmet-gltf" position="-2 1.7 -4" scale="1 1 1" shadow="cast:true; receive:true;" spherical-env-map="src:#skymap;"></a-gltf-model>
-                <a-entity create-cow-component obj-model="obj:#Hat-obj;" position="0 1.15 -2.35" scale="0.02 0.015 0.02" material="color:#fff; src:#hatMap; sphericalEnvMap:#skymap; roughness:2.0; metalness:0.2;" shadow="cast:false; receive:true;"></a-entity>
-                <a-entity obj-model="obj:#Room-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#roomMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-                <a-entity play-music obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+                <a-entity obj-model="obj:#Room-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#roomMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>              
+                <a-entity play-music obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;">
+                        <a-animation attribute="rotation"
+                        obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"
+                        dur ="1000"
+                        fill ="forwards"
+                        to="0 360 0"
+                        repeat="indefinite"></a-animation>
+                </a-entity>                        
                 <a-entity play-effect obj-model="obj:#tv-obj;" position="7.5 1.0 2.2" scale="0.03 0.03 0.035" material="color:#fff; src:#tvMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
                 <a-entity create-tv-screen obj-model="obj:#remoteControl-obj;" position="1.6 0.7 3.0" scale="0.03 0.03 0.035" material="color:#fff; src:#remoteControlMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
                 <a-entity create-fireplace obj-model="obj:#fireplace-obj;" position="-8.3 0.0 -8.5" scale="0.06 0.05 0.06" material="color:#fff; src:#fireplaceMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-  
+
+                <a-entity click-drag position obj-model="obj:#ball-obj;" position="0 0 -4" scale="0.06 0.05 0.06" material="color:#fff; src:#ballMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+                <a-entity play-bark obj-model="obj:#dog-obj;" position="-1 0 -4" scale="0.06 0.05 0.06" material="color:#fff; src:#dogMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;">
+                     <a-animation attribute="rotation"
+                        dur ="1000"
+                        fill ="forwards"
+                        to="0 360 0"
+                        repeat="3"></a-animation>
+                </a-entity>
+
                 <!-- plane so we can see shadows -->
                 <a-entity id="plane" geometry="primitive:plane; width:30; height:30;" position="0 0 -4" rotation="-90 0 0" 
                     shadow="receive:true;" material="color:#6B6B6B; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;"></a-entity>
