@@ -64,3 +64,5 @@ AFRAME.registerComponent('create-fireplace', {
         scene.appendChild(fireElem);
     }
 });
+
+
