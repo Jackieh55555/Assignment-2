@@ -1,3 +1,7 @@
+<!--Name: Jacqueline Huang-->
+<!--Assignment: Assignment #2-->
+<!--Course Code: IMD 3901-->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,14 +14,15 @@
         <script src="/js/remove-component.js"></script>
         <script src="/js/play-sounds.js"></script>
         <script src="/js/create-2nd-object.js"></script>
-
+        
     </head>
     <body>
         <!-- main scene and we added shadows .. -->
+        
         <a-scene shadow="type:basic;">
                 <a-assets timeout="3000">
 
-                    <!-- all assets that can be cached by browser -->
+                    <!-- Loading all the object textures -->
                     <img crossorigin="anonymous" id="skymap" src="/assets/textures/Sky.jpg">
                     <img id="roomMap" src="/assets/textures/RoomInterior.png">
                     <img id="musicBoxMap" src="/assets/textures/MusicBox.png">
@@ -27,7 +32,8 @@
                     <img id="fireplaceMap" src="/assets/textures/Fireplace.png">
                     <img id="dogMap" src="/assets/textures/Dog.png">
                     <img id="ballMap" src="/assets/textures/Ball.png">
-
+                    
+                    <!-- Loading all the object files -->
                     <a-asset-item id="Room-obj" src="/assets/models/RoomInterior.obj">
                     <a-asset-item id="musicBox-obj" src="/assets/models/MusicBox.obj">
                     <a-asset-item id="tv-obj" src="/assets/models/TV.obj">
@@ -37,24 +43,16 @@
                     <a-asset-item id="dog-obj" src="/assets/models/Dog.obj">
                     <a-asset-item id="ball-obj" src="/assets/models/Ball.obj">
 
-                    <!-- use this method if you are having problems with sound playing -->
-                    <!-- sounds from "SuperSays" project : https://github.com/supermedium/supersays/tree/master/src/assets -->
-                    <a-asset-item crossorigin="anonymous" id="create-sound" src="/assets/sound/0.ogg" response-type="arraybuffer"></a-asset-item>
+                    <!--Defining sounds and effects-->    
                     <a-asset-item crossorigin="anonymous" id="delete-sound" src="/assets/sound/Delete.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-sound" src="/assets/sound/Happier.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-effect" src="/assets/sound/TV_SoundEffect.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-ScreenEffect" src="/assets/sound/TV_Screen.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-FireEffect" src="/assets/sound/Fireplace.mp3" response-type="arraybuffer"></a-asset-item>
                     <a-asset-item crossorigin="anonymous" id="play-DogEffect" src="/assets/sound/Dog.mp3" response-type="arraybuffer"></a-asset-item>
-
-
-                    <!-- this is the recommended method to preload sound though the above method seems to work consistently -->
-                    <!-- <audio id="create-sound" crossorigin="anonymous" src="/assets/sound/0.ogg" ></audio> -->
-                    <!-- <audio id="delete-sound" crossorigin="anonymous" src="/assets/sound/1.ogg" ></audio> -->
                 </a-assets>
 
-                <!-- traditional method of creating a camera and cursor component for selection. select with reticle. -->
-                <!-- Also added in controls for desktop mouse/kb -->
+                <!-- Drawing the cursor in the middle of the screen --> 
                 <a-entity position="0 2 0 " camera look-controls wasd-controls>
                     <a-entity   cursor="fuse:true; fuseTimeout:500;"
                                 position="0 0 -1"
@@ -63,7 +61,7 @@
                     </a-entity>
                 </a-entity>
 
-                <!-- sound entities we will query and play in components -->
+                <!-- Sound entities we will query and play in components -->
                 <a-entity id="createSound" sound="src:#create-sound"></a-entity>
                 <a-entity id="deleteSound" sound="src:#delete-sound"></a-entity>
                 <a-entity id="playSound" sound="src:#play-sound"></a-entity>
@@ -72,51 +70,45 @@
                 <a-entity id="playFireEffect" sound="src:#play-FireEffect"></a-entity>
                 <a-entity id="playDogEffect" sound="src:#play-DogEffect"></a-entity>
             
-                <!-- default lighting added in manually -->
+                <!-- Adding lighting to the environment -->
                 <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
                 <a-entity light="type: ambient; intensity: 1.0; color:#bbb;"></a-entity>
 
-                <a-entity obj-model="obj:#Room-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#roomMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>              
+                <!--Loading and position each individual objects-->
+                <a-entity obj-model="obj:#Room-obj;" position="0 0 -3.0" scale="0.05 0.03 0.05" material="color:#fff; src:#roomMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>                                
+                <a-entity play-effect obj-model="obj:#tv-obj;" position="7.5 1.0 2.2" scale="0.03 0.03 0.035" material="color:#fff; src:#tvMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity create-tv-screen obj-model="obj:#remoteControl-obj;" position="1.6 0.7 3.0" scale="0.03 0.03 0.035" material="color:#fff; src:#remoteControlMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                <a-entity create-fireplace obj-model="obj:#fireplace-obj;" position="-8.3 0.0 -8.5" scale="0.06 0.05 0.06" material="color:#fff; src:#fireplaceMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+
+                <a-entity create-ball obj-model="obj:#ball-obj;" position="0 0 -4" scale="0.06 0.05 0.06" material="color:#fff; src:#ballMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
+                
+                <!--Adding small animation and sound effects when object is selected-->
                 <a-entity play-music obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;">
                     <a-animation begin="click" attribute="rotation"
                         obj-model="obj:#musicBox-obj;" position="2.6 0.65 4.0" scale="0.03 0.03 0.03" material="color:#fff; src:#musicBoxMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"
                         dur ="1000"
                         fill ="forwards"
                         to="0 360 0"
-                        repeat="3">
+                        repeat="8">
                     </a-animation>
-                </a-entity>                        
-                <a-entity play-effect obj-model="obj:#tv-obj;" position="7.5 1.0 2.2" scale="0.03 0.03 0.035" material="color:#fff; src:#tvMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-                <a-entity create-tv-screen obj-model="obj:#remoteControl-obj;" position="1.6 0.7 3.0" scale="0.03 0.03 0.035" material="color:#fff; src:#remoteControlMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-                <a-entity create-fireplace obj-model="obj:#fireplace-obj;" position="-8.3 0.0 -8.5" scale="0.06 0.05 0.06" material="color:#fff; src:#fireplaceMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-
-                <a-entity create-ball obj-model="obj:#ball-obj;" position="0 0 -4" scale="0.06 0.05 0.06" material="color:#fff; src:#ballMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;"></a-entity>
-
+                </a-entity>      
                 <a-entity play-bark obj-model="obj:#dog-obj;" position="-1 0 -4" scale="0.06 0.05 0.06" material="color:#fff; src:#dogMap; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.2;" shadow="cast:true; receive:true;">
                      <a-animation begin=click attribute="rotation"
                         dur ="1000"
                         fill ="forwards"
                         to="0 360 0"
-                        repeat="3"></a-animation>
+                        repeat="5"></a-animation>
                 </a-entity>
 
-                <!-- plane so we can see shadows -->
+                <!-- Creating a plane to set the ground floor-->
                 <a-entity id="plane" geometry="primitive:plane; width:30; height:30;" position="0 0 -4" rotation="-90 0 0" 
                     shadow="receive:true;" material="color:#6B6B6B; sphericalEnvMap:#skymap; roughness:0.5; metalness:0.0;"></a-entity>
             
-                <!-- manual method of creating "sky sphere" -->
+                <!-- Adding the sky environment" -->
                 <a-entity id="sky"
                     geometry="primitive:sphere; radius:500;"
                     material="shader:flat; src:#skymap; side:back; height:2048; width:2048"></a-entity>
                 
-                <script src="/node/socket.io/socket.io.js"></script>
-                <script>
-                        let socket = io();
-                
-                        //default connect event
-                        socket.on('connect', function() {
-                            console.log("connected!");
-                        });
                 </script>
         </a-scene>
     </body>
